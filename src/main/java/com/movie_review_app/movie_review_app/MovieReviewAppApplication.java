@@ -1,13 +1,13 @@
-package com.movie_review_app.moview_review_app;
+package com.movie_review_app.movie_review_app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MoviewReviewAppApplication {
+public class MovieReviewAppApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MoviewReviewAppApplication.class, args);
+		SpringApplication.run(MovieReviewAppApplication.class, args);
 	}
 
 }
