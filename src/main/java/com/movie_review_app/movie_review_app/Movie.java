@@ -23,8 +23,9 @@ public class Movie {
     private String releaseDate;
     private String trailerLink;
     private String poster;
-    private List<Integer> genres;
+    private List<String> genres;
     private List<String> backdrops;
     @DocumentReference
     private List<Review> reviewIds; // One to Many Relationship
+
 }
