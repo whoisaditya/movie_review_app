@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import com.mongodb.client.model.DeleteOneModel;
+
 @Service
 public class ReviewService {
     @Autowired
@@ -36,4 +38,18 @@ public class ReviewService {
 
         return mongoTemplate.findAndModify(query, updateDefinition, options, Review.class);
     } 
+
+    public Review deleteReview(String reviewId, String imdbId) {
+        ObjectId id = new ObjectId(reviewId);
+
+        Query query = new Query().addCriteria(Criteria.where("_id").is(id));
+        Review removedReview = mongoTemplate.findAndRemove(query, Review.class);
+
+        mongoTemplate.update(Movie.class)
+            .matching(Criteria.where("imdbId").is(imdbId))
+            .apply(new Update().pull("reviewIds", removedReview))
+            .first();
+    
+        return removedReview;
+    }
 }

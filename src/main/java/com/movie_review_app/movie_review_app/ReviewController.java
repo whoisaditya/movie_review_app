@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -26,5 +27,10 @@ public class ReviewController {
     @PutMapping("{reviewId}")
     public ResponseEntity<Review> updateReview(@RequestBody Map<String, String> payload, @PathVariable String reviewId) {
         return new ResponseEntity<Review>(reviewService.updateReview(payload.get("reviewBody"), reviewId), HttpStatus.OK);
+    }
+
+    @DeleteMapping("{reviewId}") 
+    public ResponseEntity<Review> deleteReview(@RequestBody Map<String, String> payload, @PathVariable String reviewId) {
+        return new ResponseEntity<Review>(reviewService.deleteReview(reviewId, payload.get("imdbId")), HttpStatus.OK);
     }
 }
